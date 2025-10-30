@@ -1,0 +1,43 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+    margin: 0;
+    background: #207fc4; 
+    color: white;
+    flex-direction: column;
+    text-align: center;
+}
+
+h1 {
+    font-size: 48px;
+    margin-bottom: 40px;
+}
+
+button {
+    padding: 15px 40px;
+    font-size: 24px;
+    border: none;
+    border-radius: 8px;
+    background-color: #FFD700;
+    color: #000000;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+}
+
+button:hover {
+    background-color: #FFA500;
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 36px;
+    }
+    button {
+        font-size: 18px;
+        padding: 12px 30px;
+    }
+}
