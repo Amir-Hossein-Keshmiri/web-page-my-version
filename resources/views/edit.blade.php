@@ -9,9 +9,13 @@
     <div class="container">
         <h1>Edit User</h1>
 
-        <form onsubmit="return updateUser();">
-            <input type="text" id="name" placeholder="Enter name" value="{{ $user['name'] }}" required>
-            <input type="email" id="email" placeholder="Enter email" value="{{ $user['email'] }}" required>
+        <form action="{{ route('users.update', $user->id) }}" method="POST">
+            @csrf
+            @method('PUT')
+
+            <input type="text" name="name" placeholder="Enter name" value="{{ $user->name }}" required>
+            <input type="email" name="email" placeholder="Enter email" value="{{ $user->email }}" required>
+
             <button type="submit">Update</button>
         </form>
 

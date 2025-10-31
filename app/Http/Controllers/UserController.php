@@ -3,18 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class UserController extends Controller
 {
-    private $users = [
-        ['id' => 1, 'name' => 'Amir Hossein', 'email' => 'amir@example.com'],
-        ['id' => 2, 'name' => 'Sara', 'email' => 'sara@example.com'],
-        ['id' => 3, 'name' => 'Ali', 'email' => 'ali@example.com'],
-    ];
-
     public function users()
     {
-        $users = $this->users;
+        $users = User::all();
         return view('users', compact('users'));
     }
 
@@ -23,19 +18,50 @@ class UserController extends Controller
         return view('create');
     }
 
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+        ]);
+
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt('123'),
+        ]);
+
+        return redirect()->route('users.users')->with('message', "User {$request->name} created!");
+    }
+
     public function edit($id)
     {
-        $user = collect($this->users)->firstWhere('id', $id);
-
-        if (!$user) {
-            return redirect()->route('users.users')->with('message', "User with ID {$id} not found!");
-        }
-
+        $user = User::findOrFail($id);
         return view('edit', compact('user'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => "required|email|unique:users,email,{$id}",
+        ]);
+
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+        ]);
+
+        return redirect()->route('users.users')->with('message', "User {$user->name} updated!");
     }
 
     public function delete($id)
     {
-        return redirect()->route('users.users')->with('message', "User with ID {$id} deleted!");
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        return redirect()->route('users.users')->with('message', "User {$user->name} deleted!");
     }
 }
