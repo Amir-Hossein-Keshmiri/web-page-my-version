@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Post;
 use App\Models\Comment;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -101,5 +102,16 @@ class UserController extends Controller
         $user->delete();
 
         return redirect()->route('users.users')->with('message', "User {$user->name} deleted!");
+    }
+
+    public function usersWithPosts()
+    {
+        $users = User::select('users.id', 'users.name', DB::raw('COUNT(posts.id) as posts_count'))
+            ->join('posts', 'users.id', '=', 'posts.user_id')
+            ->groupBy('users.id', 'users.name')
+            ->having('posts_count', '>=', 3)
+            ->get();
+
+        return view('users_with_posts', compact('users'));
     }
 }
