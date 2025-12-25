@@ -29,6 +29,8 @@
                     <td>{{ $user['name'] }}</td>
                     <td>{{ $user['email'] }}</td>
                     <td class="actions">
+                        <button class="posts-btn" onclick="window.location.href='/users/{{ $user['id'] }}/posts'">🖼️ Posts</button>
+                        <button class="comments-btn" onclick="window.location.href='/users/{{ $user['id'] }}/comments'">🖹 Comments</button>
                         <button class="edit-btn" onclick="window.location.href='/users/{{ $user['id'] }}/edit'">✏️ Edit</button>
 
                         <form action="{{ route('users.delete', $user['id']) }}" method="POST" onsubmit="return confirm('Are you sure?');">
@@ -43,8 +45,8 @@
         </table>
 
         <div class="buttons">
-            <button onclick="window.location.href='/users/create'">➕ Create User</button>
             <button onclick="window.location.href='/'">🏠 Back Home</button>
+            <button onclick="window.location.href='/users/create'">➕ Create User</button>
         </div>
     </div>
 </body>

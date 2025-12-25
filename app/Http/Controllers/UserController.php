@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use App\Models\User;
+use App\Models\Post;
+use App\Models\Comment;
 
 class UserController extends Controller
 {
@@ -11,6 +14,42 @@ class UserController extends Controller
     {
         $users = User::all();
         return view('users', compact('users'));
+    }
+
+    public function posts()
+    {
+        
+    }
+
+    public function posts_user()
+    {
+        $posts = Post::all();
+        return view('posts_user', compact('posts'));
+    }
+
+    public function posts_create()
+    {
+        
+    }
+
+    public function posts_delete()
+    {
+        
+    }
+
+    public function comments_user()
+    {
+        
+    }
+
+    public function comments_create()
+    {
+        
+    }
+
+    public function comments_delete()
+    {
+        
     }
 
     public function create()
@@ -28,7 +67,6 @@ class UserController extends Controller
         User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => bcrypt('123'),
         ]);
 
         return redirect()->route('users.users')->with('message', "User {$request->name} created!");

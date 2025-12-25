@@ -1,43 +1,74 @@
 body {
     font-family: 'Poppins', sans-serif;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh; 
+    height: 100vh;
     margin: 0;
-    background: #207fc4; 
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); /* گرادینت تاریک و مدرن */
     color: white;
-    flex-direction: column;
     text-align: center;
+    overflow: hidden;
 }
 
 h1 {
-    font-size: 48px;
-    margin-bottom: 40px;
+    font-size: 56px;
+    margin-bottom: 80px;
+    letter-spacing: 2px;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    animation: fadeDown 1.2s ease-in-out;
+}
+
+.buttons {
+    display: flex;
+    gap: 60px;
+    animation: fadeUp 1.5s ease-in-out;
 }
 
 button {
-    padding: 15px 40px;
-    font-size: 24px;
-    border: none;
-    border-radius: 8px;
-    background-color: #FFD700;
-    color: #000000;
+    padding: 18px 50px;
+    font-size: 22px;
+    font-weight: 600;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50px;
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     cursor: pointer;
-    transition: background 0.3s, transform 0.3s;
+    transition: all 0.3s ease;
 }
 
 button:hover {
-    background-color: #FFA500;
-    transform: scale(1.05);
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-5px) scale(1.08);
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
+@keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 @media (max-width: 768px) {
     h1 {
-        font-size: 36px;
+        font-size: 42px;
+        margin-bottom: 50px;
     }
+
+    .buttons {
+        flex-direction: column;
+        gap: 25px;
+    }
+
     button {
         font-size: 18px;
-        padding: 12px 30px;
+        padding: 14px 36px;
     }
 }

@@ -53,6 +53,9 @@ Styled with clean CSS and responsive design.
 ### Home Page
 ![Welcome](screenshots/welcome.png)
 
+### Posts
+![Posts](screenshots/posts.png)
+
 ### Users List
 ![Users List](screenshots/users.png)
 
